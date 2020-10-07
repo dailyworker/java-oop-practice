@@ -10,22 +10,37 @@ public class CardDeck {
         this.cards = cards;
     }
 
+    public CardDeck() {
+
+    }
+
     public List<Card> getCards() {
         return cards;
     }
 
     public void generatedCardDeckByPattern(String pattern){
-
-        String denomination = null;
-
         for(int i = 0; i < 14; i++){
-            if(i == 0) denomination = "A";
-            if(i == 11) denomination = "J";
-            if(i == 12) denomination = "Q";
-            if(i == 13) denomination = "K";
-            denomination = String.valueOf(i);
+            String denomination = numberToDenomination(i);
             Card card = new Card(CardSuit.valueOf(pattern), denomination);
             this.cards.add(card);
         }
+    }
+
+    public String numberToDenomination(int number){
+        if(number == 0){
+            return "A";
+        } else if(number == 11) {
+            return "J";
+        } else if(number == 12) {
+            return "Q";
+        } else if(number == 13) {
+            return "K";
+        } else {
+            return String.valueOf(number);
+        }
+    }
+
+    public void addCard(Card card) {
+        this.cards.add(card);
     }
 }

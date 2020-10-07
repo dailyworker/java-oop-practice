@@ -16,19 +16,15 @@ class CardDeckTest {
     @DisplayName("초기 카드덱 초기화")
     public void 문양별_카드덱_만들기(String pattern){
 
+        CardDeck cardDeck = new CardDeck();
         List<Card> cards = new ArrayList<>();
-        String denomination = null;
 
         for(int i = 0; i < 14; i++){
-            if(i == 0) denomination = "A";
-            if(i == 11) denomination = "J";
-            if(i == 12) denomination = "Q";
-            if(i == 13) denomination = "K";
-            denomination = String.valueOf(i);
+            String denomination = cardDeck.numberToDenomination(i);
             Card card = new Card(CardSuit.valueOf(pattern), denomination);
-            cards.add(card);
+            cards.add(card); // 비교용 Card List Arr
+            cardDeck.addCard(card);
         }
-        CardDeck cardDeck = new CardDeck(cards);
         assertSame(cardDeck.getCards().get(0), cards.get(0));
     }
 }
