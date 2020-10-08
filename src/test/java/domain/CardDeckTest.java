@@ -1,13 +1,14 @@
 package domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CardDeckTest {
 
@@ -27,4 +28,18 @@ class CardDeckTest {
         }
         assertSame(cardDeck.getCards().get(0), cards.get(0));
     }
+
+    @Test
+    @DisplayName("전체 카드덱 초기화")
+    public void 전체_카드덱_만들기() {
+        String[] patterns = {"SPADE", "HEART", "DIAMOND", "CLUB"};
+        CardDeck actualCardDeck = new CardDeck();
+        CardDeck expectedCardDeck = new CardDeck();
+
+        actualCardDeck.generatedAllCardDeck(patterns);
+        expectedCardDeck.generatedAllCardDeck(patterns);
+
+        assertTrue(expectedCardDeck.getCards().containsAll(actualCardDeck.getCards()));
+    }
+
 }

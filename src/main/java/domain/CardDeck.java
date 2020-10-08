@@ -43,4 +43,10 @@ public class CardDeck {
     public void addCard(Card card) {
         this.cards.add(card);
     }
+
+    public void generatedAllCardDeck(String[] patterns) {
+        for(int i = 0; i < patterns.length; i++) {
+            generatedCardDeckByPattern(patterns[i]);
+        }
+    }
 }
