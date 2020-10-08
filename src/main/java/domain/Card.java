@@ -12,6 +12,10 @@ public class Card {
         this.denomination = denomination;
     }
 
+    public Card() {
+
+    }
+
     public CardSuit getPattern() {
         return pattern;
     }

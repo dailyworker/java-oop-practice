@@ -6,8 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,7 +41,11 @@ class CardDeckTest {
     public void 전체_카드덱_만들기() {
         CardDeck actualCardDeck = new CardDeck();
         CardDeck expectedCardDeck = new CardDeck();
-        assertTrue(expectedCardDeck.getCards().containsAll(actualCardDeck.getCards()));
+
+        assertAll("Generating All Card",
+                () -> assertTrue(expectedCardDeck.getCards().containsAll(actualCardDeck.getCards())),
+                () -> assertEquals(52, actualCardDeck.getCards().size())
+        );
     }
 
     @Test
@@ -52,5 +54,18 @@ class CardDeckTest {
         CardDeck actualCardDeck = new CardDeck();
         CardDeck expectedCardDeck = new CardDeck();
         assertNotEquals(expectedCardDeck.getCards().get(1).getPattern(), actualCardDeck.getCards().get(1).getPattern());
+    }
+
+    @Test
+    @DisplayName("카드 드로우")
+    public void 카드_뽑기() {
+        CardDeck cardDeck = new CardDeck();
+        Card actualCard = cardDeck.getCards().get(0);
+        Card expectedCard = cardDeck.draw();
+
+        assertAll("Card Draw Test",
+                () -> assertEquals(actualCard, expectedCard),
+                () -> assertEquals(51, cardDeck.getCards().size())
+        );
     }
 }
