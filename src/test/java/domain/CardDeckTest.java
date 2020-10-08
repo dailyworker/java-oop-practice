@@ -29,6 +29,13 @@ class CardDeckTest {
         assertSame(cardDeck.getCards().get(0), cards.get(0));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"SPADES", "HEARTS", "DIAMONDS", "CLUBS"})
+    @DisplayName("문양 값이 잘못 들어오는 경우")
+    public void 문양이_Enum에_있지_않은_값으로_들어오는_경우(String patterns){
+        assertFalse(CardSuit.contains(patterns));
+    }
+
     @Test
     @DisplayName("전체 카드덱 초기화")
     public void 전체_카드덱_만들기() {

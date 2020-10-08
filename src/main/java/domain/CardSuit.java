@@ -29,4 +29,13 @@ public enum CardSuit {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public static boolean contains(String title){
+        for(CardSuit cardSuit : CardSuit.values()){
+            if(cardSuit.name().equalsIgnoreCase(title)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
