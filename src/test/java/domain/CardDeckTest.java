@@ -51,8 +51,6 @@ class CardDeckTest {
     public void 카드_섞기() {
         CardDeck actualCardDeck = new CardDeck();
         CardDeck expectedCardDeck = new CardDeck();
-
-        Collections.shuffle(expectedCardDeck.getCards());
         assertNotEquals(expectedCardDeck.getCards().get(1).getPattern(), actualCardDeck.getCards().get(1).getPattern());
     }
 }
