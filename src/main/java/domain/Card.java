@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class Card {
 
     private CardSuit pattern;
@@ -24,5 +26,19 @@ public class Card {
 
     public void setDenomination(String denomination) {
         this.denomination = denomination;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Card)) return false;
+        Card card = (Card) o;
+        return getPattern() == card.getPattern() &&
+                Objects.equals(getDenomination(), card.getDenomination());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPattern(), getDenomination());
     }
 }
