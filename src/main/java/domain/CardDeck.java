@@ -1,17 +1,22 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CardDeck {
     private List<Card> cards = new ArrayList<>();
 
-    public CardDeck(List<Card> cards) {
-        this.cards = cards;
-    }
+    private static final String[] patterns = {
+            CardSuit.SPADE.name(),
+            CardSuit.HEART.name(),
+            CardSuit.DIAMOND.name(),
+            CardSuit.CLUB.name()
+    };
 
     public CardDeck() {
-
+        generatedAllCardDeck(patterns);
+        shuffleCardDeck();
     }
 
     public List<Card> getCards() {
@@ -40,13 +45,17 @@ public class CardDeck {
         }
     }
 
-    public void addCard(Card card) {
-        this.cards.add(card);
-    }
-
     public void generatedAllCardDeck(String[] patterns) {
         for(int i = 0; i < patterns.length; i++) {
             generatedCardDeckByPattern(patterns[i]);
         }
+    }
+
+    public void shuffleCardDeck(){
+        Collections.shuffle(cards);
+    }
+
+    public void addCard(Card card) {
+        this.cards.add(card);
     }
 }
