@@ -6,6 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,14 +41,18 @@ class CardDeckTest {
     @Test
     @DisplayName("전체 카드덱 초기화")
     public void 전체_카드덱_만들기() {
-        String[] patterns = {"SPADE", "HEART", "DIAMOND", "CLUB"};
         CardDeck actualCardDeck = new CardDeck();
         CardDeck expectedCardDeck = new CardDeck();
-
-        actualCardDeck.generatedAllCardDeck(patterns);
-        expectedCardDeck.generatedAllCardDeck(patterns);
-
         assertTrue(expectedCardDeck.getCards().containsAll(actualCardDeck.getCards()));
     }
 
+    @Test
+    @DisplayName("카드 덱 셔플하기")
+    public void 카드_섞기() {
+        CardDeck actualCardDeck = new CardDeck();
+        CardDeck expectedCardDeck = new CardDeck();
+
+        Collections.shuffle(expectedCardDeck.getCards());
+        assertNotEquals(expectedCardDeck.getCards().get(1).getPattern(), actualCardDeck.getCards().get(1).getPattern());
+    }
 }
