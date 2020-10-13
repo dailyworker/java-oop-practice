@@ -7,9 +7,8 @@ import java.util.List;
 
 public class Dealer {
 
-    private final int ADDITIONAL_DRAW_CRITERIA = 17;
-    private final int MAXIMUM_HAND_SIZE = 3;
-    private final String[] pattern = {"A", "J", "Q", "K"};
+    private static final int ADDITIONAL_DRAW_CRITERIA = 17;
+    private static final int MAXIMUM_HAND_SIZE = 3;
     private int point = 0;
 
     private List<Card> cards = new ArrayList<>();
@@ -25,7 +24,7 @@ public class Dealer {
     private void addHandCard(Card card) {
         if (isDrawable()){
             this.cards.add(card);
-            setPoint(denominationToPoint(card.getDenomination()));
+            setPoint(card.getPoint());
         } else {
             throw new CardDrawException("포인트 합이 17이 넘으므로, 카드를 드로우 할 수 없습니다.");
         }
@@ -43,24 +42,9 @@ public class Dealer {
         return cards;
     }
 
-    private int denominationToPoint(String denomination) {
-        if(pattern[0].equals(denomination)) {
-            return 1;
-        } else if(pattern[1].equals(denomination)) {
-            return 10;
-        } else if(pattern[2].equals(denomination)) {
-            return 10;
-        } else if(pattern[3].equals(denomination)) {
-            return 10;
-        } else {
-            return Integer.parseInt(denomination);
-        }
-    }
-
     private void setPoint(int pointFromDenomination) {
         this.point += pointFromDenomination;
     }
-
 
     public List<Card> cardOpen(){
         return this.cards;
