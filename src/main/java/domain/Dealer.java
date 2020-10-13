@@ -9,7 +9,7 @@ public class Dealer {
 
     private static final int ADDITIONAL_DRAW_CRITERIA = 17;
     private static final int MAXIMUM_HAND_SIZE = 3;
-    private int point = 0;
+    private int dealerPoint = 0;
 
     private List<Card> cards = new ArrayList<>();
 
@@ -31,19 +31,19 @@ public class Dealer {
     }
 
     private boolean isDrawable() {
-        return getPoint() < ADDITIONAL_DRAW_CRITERIA;
+        return getDealerPoint() < ADDITIONAL_DRAW_CRITERIA;
     }
 
-    public int getPoint() {
-        return point;
+    public int getDealerPoint() {
+        return dealerPoint;
     }
 
     public List<Card> getCards() {
         return cards;
     }
 
-    private void setPoint(int pointFromDenomination) {
-        this.point += pointFromDenomination;
+    private void setPoint(int cardPoint) {
+        this.dealerPoint += cardPoint;
     }
 
     public List<Card> cardOpen(){
