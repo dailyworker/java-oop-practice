@@ -5,13 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class CardDeck {
-    private List<Card> cards = new ArrayList<>();
 
     private static final int CARD_DECK_SIZE = 13;
     private static final int PATTERN_A_NUMBER = 1;
     private static final int PATTERN_J_NUMBER = 11;
     private static final int PATTERN_Q_NUMBER = 12;
     private static final int PATTERN_K_NUMBER = 13;
+
+    private List<Card> cards = new ArrayList<>();
 
     private static final String[] patterns = {
             CardSuit.SPADE.name(),
@@ -21,7 +22,7 @@ public class CardDeck {
     };
 
     public CardDeck() {
-        generatedAllCardDeck(patterns);
+        generatedAllCardDeck();
         shuffleCardDeck();
     }
 
@@ -29,7 +30,17 @@ public class CardDeck {
         return cards;
     }
 
-    public void generatedCardDeckByPattern(String pattern){
+    public void shuffleCardDeck(){
+        Collections.shuffle(cards);
+    }
+
+    public Card draw() {
+        Card returnCard = this.cards.get(0);
+        this.cards.remove(0);
+        return returnCard;
+    }
+
+    private void generatedCardDeckByPattern(String pattern){
         for(int i = 1; i <= CARD_DECK_SIZE; i++){
             String denomination = numberToDenomination(i);
             Card card = new Card(CardSuit.valueOf(pattern), denomination);
@@ -37,7 +48,7 @@ public class CardDeck {
         }
     }
 
-    public String numberToDenomination(int number){
+    private String numberToDenomination(int number){
         if(number == PATTERN_A_NUMBER){
             return "A";
         } else if(number == PATTERN_J_NUMBER) {
@@ -51,23 +62,20 @@ public class CardDeck {
         }
     }
 
-    public void generatedAllCardDeck(String[] patterns) {
-        for(int i = 0; i < patterns.length; i++) {
-            generatedCardDeckByPattern(patterns[i]);
+    private void generatedAllCardDeck() {
+        for(int i = 0; i < CardDeck.patterns.length; i++) {
+            generatedCardDeckByPattern(CardDeck.patterns[i]);
         }
     }
 
-    public void shuffleCardDeck(){
-        Collections.shuffle(cards);
-    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
 
-    public void addCard(Card card) {
-        this.cards.add(card);
-    }
-
-    public Card draw() {
-        Card returnCard = this.cards.get(0);
-        this.cards.remove(0);
-        return returnCard;
+        for(Card card : cards){
+            sb.append(card.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
