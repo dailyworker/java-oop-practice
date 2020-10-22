@@ -2,6 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import util.PlayerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,9 @@ class RuleTest {
         dealer.receiveCard(cardDeck.draw());
 
         if(rule.isDealerDrawable(dealer.cardOpen())) {
-            assertTrue(rule.calculatePoint(dealer.cardOpen()) < 17);
+            assertTrue(PlayerUtil.getPlayerGamePoint(dealer) < 17);
         } else {
-            assertTrue(rule.calculatePoint(dealer.cardOpen()) > 16);
+            assertTrue(PlayerUtil.getPlayerGamePoint(dealer) > 16);
         }
     }
 
@@ -32,7 +33,6 @@ class RuleTest {
     public void 누가_이번_게임의_승리자인가() {
 
         List<Player> players = new ArrayList<>();
-
         CardDeck cardDeck = new CardDeck();
         Rule rule = new Rule();
 
@@ -46,13 +46,11 @@ class RuleTest {
             dealer.receiveCard(cardDeck.draw());
             gamer.receiveCard(cardDeck.draw());
         }
-
-        if(rule.isDealerDrawable(dealer.cardOpen())) {
             dealer.receiveCard(cardDeck.draw());
-        }
+            gamer.receiveCard(cardDeck.draw());
 
-        int dealerPoint = rule.calculatePoint(dealer.cardOpen());
-        int gamerPoint = rule.calculatePoint(gamer.cardOpen());
+        int dealerPoint = PlayerUtil.getPlayerGamePoint(dealer);
+        int gamerPoint  = PlayerUtil.getPlayerGamePoint(gamer);
 
         System.out.println("Dealer Total Point : " + dealerPoint + " Gamer Total Point : " + gamerPoint);
 
